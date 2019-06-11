@@ -174,17 +174,17 @@ PrefabInstance:
     - target: {fileID: 198352197673353738, guid: 22d6eca7f0c9598449f2566e043ab643,
         type: 3}
       propertyPath: randomSeed
-      value: -1046571808
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 198251025729180936, guid: 22d6eca7f0c9598449f2566e043ab643,
         type: 3}
       propertyPath: randomSeed
-      value: -346578226
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 198427892058995556, guid: 22d6eca7f0c9598449f2566e043ab643,
         type: 3}
       propertyPath: randomSeed
-      value: -1851655273
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1376877392041436, guid: 22d6eca7f0c9598449f2566e043ab643, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -273,17 +273,17 @@ PrefabInstance:
     - target: {fileID: 198352197673353738, guid: 22d6eca7f0c9598449f2566e043ab643,
         type: 3}
       propertyPath: randomSeed
-      value: 626990923
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 198251025729180936, guid: 22d6eca7f0c9598449f2566e043ab643,
         type: 3}
       propertyPath: randomSeed
-      value: 967058029
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 198427892058995556, guid: 22d6eca7f0c9598449f2566e043ab643,
         type: 3}
       propertyPath: randomSeed
-      value: 1338836213
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1376877392041436, guid: 22d6eca7f0c9598449f2566e043ab643, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -1241,17 +1241,17 @@ PrefabInstance:
     - target: {fileID: 198352197673353738, guid: 22d6eca7f0c9598449f2566e043ab643,
         type: 3}
       propertyPath: randomSeed
-      value: 1727596242
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 198251025729180936, guid: 22d6eca7f0c9598449f2566e043ab643,
         type: 3}
       propertyPath: randomSeed
-      value: 26194081
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 198427892058995556, guid: 22d6eca7f0c9598449f2566e043ab643,
         type: 3}
       propertyPath: randomSeed
-      value: 2086131698
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1376877392041436, guid: 22d6eca7f0c9598449f2566e043ab643, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -2003,6 +2003,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5685f50765fb945fabc91d4075f08650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &765672447
 GameObject:
   m_ObjectHideFlags: 0
@@ -2368,17 +2371,17 @@ PrefabInstance:
     - target: {fileID: 198352197673353738, guid: 22d6eca7f0c9598449f2566e043ab643,
         type: 3}
       propertyPath: randomSeed
-      value: -297744611
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 198251025729180936, guid: 22d6eca7f0c9598449f2566e043ab643,
         type: 3}
       propertyPath: randomSeed
-      value: 81943204
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 198427892058995556, guid: 22d6eca7f0c9598449f2566e043ab643,
         type: 3}
       propertyPath: randomSeed
-      value: -1102677389
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1376877392041436, guid: 22d6eca7f0c9598449f2566e043ab643, type: 3}
       propertyPath: m_StaticEditorFlags

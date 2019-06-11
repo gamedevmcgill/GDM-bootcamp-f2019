@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public LayerMask movementMask;
+
     Camera cam;
 
     // Start is called before the first frame update
@@ -22,7 +24,7 @@ public class PlayerController : MonoBehaviour
             RaycastHit hit;
 
             // TODO: May need to explain what the "out" keyword does. Passing by value / ref
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out hit, 100, movementMask))
             {
                 Debug.Log("We hit " + hit.collider.name + " " + hit.point); 
                 // Move our player to what we hit
