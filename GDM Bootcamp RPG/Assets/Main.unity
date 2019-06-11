@@ -1917,6 +1917,7 @@ GameObject:
   - component: {fileID: 755811057}
   - component: {fileID: 755811059}
   - component: {fileID: 755811060}
+  - component: {fileID: 755811061}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -2006,6 +2007,18 @@ MonoBehaviour:
   movementMask:
     serializedVersion: 2
     m_Bits: 256
+--- !u!114 &755811061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 755811055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 720f4ac0689a04fb5a66f02e6b479675, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &765672447
 GameObject:
   m_ObjectHideFlags: 0
@@ -4158,6 +4171,7 @@ GameObject:
   - component: {fileID: 1728564188}
   - component: {fileID: 1728564187}
   - component: {fileID: 1728564192}
+  - component: {fileID: 1728564193}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -4259,6 +4273,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   profile: {fileID: 11400000, guid: bc7ef57070e716341add7384478da609, type: 2}
+--- !u!114 &1728564193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1728564186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b5eb702c0dbb4ebd837f0e72f9d4aea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 755811056}
+  offset: {x: 0, y: -1, z: -1.2}
+  pitch: 2
 --- !u!4 &1730976881 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4002246828333360, guid: a5b6531bd8601e34ea81fc1e43782119,
