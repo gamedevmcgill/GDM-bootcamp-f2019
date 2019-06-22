@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public LayerMask movementMask;
-    public float wasdForwardSpeed = 150;
+    public float wasdForwardSpeed = 15;
 
     Camera cam;
     PlayerMotor motor;
@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
         cam = Camera.main;
         motor = GetComponent<PlayerMotor>();
         rb = GetComponent<Rigidbody>();
+        rb.interpolation = RigidbodyInterpolation.Interpolate;
     }
 
     // Update is called once per frame
@@ -54,10 +55,16 @@ public class PlayerController : MonoBehaviour
         // WASD control
         //////////////////
 
-        Vector3 camForward = new Vector3(cam.transform.forward.x, 0.0f, cam.transform.forward.z);
-        Vector3 velocity = camForward * Input.GetAxis("Vertical") * wasdForwardSpeed * Time.deltaTime;
+        float vertInput = Input.GetAxis("Vertical");
+        if(vertInput != 0)
+        {
+            motor.ResetPath();
 
-        Vector3 newPosition = transform.position + velocity;
-        motor.MoveToPoint(newPosition);
+            Vector3 camForward = new Vector3(cam.transform.forward.x, 0.0f, cam.transform.forward.z);
+            Vector3 velocity = camForward * Input.GetAxis("Vertical") * wasdForwardSpeed * Time.deltaTime;
+
+            Vector3 newPosition = transform.position + velocity;
+            rb.MovePosition(newPosition);
+        }
     }
 }
