@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 607406313}
-  m_IndirectSpecularColor: {r: 0.18329246, g: 0.22892533, b: 0.3062965, a: 1}
+  m_IndirectSpecularColor: {r: 0.18329275, g: 0.22892563, b: 0.3062972, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2007,6 +2007,7 @@ MonoBehaviour:
   movementMask:
     serializedVersion: 2
     m_Bits: 256
+  wasdForwardSpeed: 150
 --- !u!114 &755811061
 MonoBehaviour:
   m_ObjectHideFlags: 0
