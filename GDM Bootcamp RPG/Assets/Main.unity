@@ -2007,7 +2007,7 @@ MonoBehaviour:
   movementMask:
     serializedVersion: 2
     m_Bits: 256
-  wasdForwardSpeed: 150
+  wasdForwardSpeed: 15
 --- !u!114 &755811061
 MonoBehaviour:
   m_ObjectHideFlags: 0
