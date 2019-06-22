@@ -6,15 +6,19 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public LayerMask movementMask;
+    public float wasdForwardSpeed = 150;
 
     Camera cam;
     PlayerMotor motor;
+    Rigidbody rb;
+
 
     // Start is called before the first frame update
     void Start()
     {
         cam = Camera.main;
         motor = GetComponent<PlayerMotor>();
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -45,5 +49,15 @@ public class PlayerController : MonoBehaviour
                 // If we did, set it as our focusg
             }
         }
+
+        //////////////////
+        // WASD control
+        //////////////////
+
+        Vector3 camForward = new Vector3(cam.transform.forward.x, 0.0f, cam.transform.forward.z);
+        Vector3 velocity = camForward * Input.GetAxis("Vertical") * wasdForwardSpeed * Time.deltaTime;
+
+        Vector3 newPosition = transform.position + velocity;
+        motor.MoveToPoint(newPosition);
     }
 }
