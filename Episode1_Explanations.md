@@ -1,8 +1,20 @@
 # Episode 1
 
-## Table of Contents
+* [Scene, Gameobject, and Components](#scene,-gameobject,-and-components)
 * [The Game Loop](#the-game-loop)
 * [Ray Casting](#ray-casting)
+
+## Scene, Gameobject, and Components
+Understanding what a Scene, Gameobject (also called an Entity), and Components are is vital in beginning to learn about game development. Different game engines may implement or call these things differently, but they all represent these three things one way or another. Don't be afraid to reread this section (or find other external resources) to make sure you understand these concepts.
+### Scene
+The scene represents the virtual world of the game. Fundementally, the scene is just **a container of all of the gameobjects (and other objects, such as lights and cameras) which are in the game world**. Unity allows us to have muliple scenes in our game, so what is commenly done is to have a seperate scene for each level in our game (each scene would contain all of the objects for that specific level). More complex scene configurations are possible, but we won't get into that here.
+### Gameobject
+A Gameobject represents an object in our game world. Common Gameobjects include: the player, weapons, buildings, vehicles, etc. Basically, almost everything in the game world (i.e. the scene) is a Gameobject. The exceptions to this are things like lights and cameras (among other things), which some engine's do not classify as Gameobjects. It is important to note however, that the Gameobject itself does not contain any logic or data. These are implemented withing **Components**, which makes Gameobjects essentially just containers for Components. In fact, in some engines the Gameobject is essentially just an ID which is associated with a set of Components!
+### Components
+A Component in Unity is an object which may contain both data and logic, that can be added to a Gameobject. Components are where the actual behaviour and appearence of a Gameobject are implemented. Therefore, by attaching different types of Components to a specific Gameobject, the behaviour and appearence of the Gameobject is created. For example, Unity's [RigidBody](https://docs.unity3d.com/ScriptReference/Rigidbody.html) component, when attached to a Gameobject, allows the Gameobject to be effected by Unity's physics system (i.e. collide with objects, experience gravity, etc). Unity provides several other built-in Components, and also allows you to create your own Components using C# or Javascript scripts.\
+#### Further reading
+https://docs.unity3d.com/510/Documentation/Manual/GameObjects.html \
+https://docs.unity3d.com/510/Documentation/Manual/TheGameObject-ComponentRelationship.html
 
 ## The Game Loop
 The game loop is by far the most fundamental design pattern in game development. As such, there is a host of different ways of implementing and optimizing it, and things can get fairly complex. That being said, even a simplified explanation can help with understanding how a game engine works and how all the systems work with each other.\
