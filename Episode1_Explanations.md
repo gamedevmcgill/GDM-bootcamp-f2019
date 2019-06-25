@@ -43,8 +43,8 @@ We have only started to scratch the surface on what a game loop is, and how we c
 [https://docs.unity3d.com/Manual/ExecutionOrder.html](https://docs.unity3d.com/Manual/ExecutionOrder.html): Unity's discription of the execution order of functions in it's game loop (especially the ones that you can override, such as Update and FixedUpdate)\
 [https://gameprogrammingpatterns.com/game-loop.html](https://gameprogrammingpatterns.com/game-loop.html): An amazing explanation of a game loop and some common pitfalls associated with it. 
 ## Ray Casting
-Ray casting is a powerful tool that every game programmer should be familiar with. Ray casting is the process of shooting a ray (essentially just a line, or a "lazer") in the scene and detecting where it hits. Mathematically, a ray can be described with the following equation:
-**r** = **o** + t**d**
+Ray casting is a powerful tool that every game programmer should be familiar with. Ray casting is the process of shooting a ray (essentially just a line, or a "lazer") in the scene and detecting where it hits. Mathematically, a ray can be described with the following equation: \
+**r** = **o** + t**d** \
 Where **o** is a vector describing the origin of the ray, **d** is a vector describing the direction of the ray, and t is any real number. We can see from this equation that a ray, as mentioned before, is just a line which starts from a finite point which is cast infinitely in our scene. By checking if this line interesects with any colliders in our scene, we are able to find the object and the point of interesection! \
 Here are some useful further readings which we recommend checking out:\
 https://docs.unity3d.com/ScriptReference/Physics.Raycast.html: Unity's documentation of their ray casting system \
