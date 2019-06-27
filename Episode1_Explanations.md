@@ -50,3 +50,24 @@ Here are some useful further readings which we recommend checking out:\
 https://docs.unity3d.com/ScriptReference/Physics.Raycast.html: Unity's documentation of their ray casting system \
 If you're curious how the intersection point can be computed, here is a great article which describes how to find the intersection of a ray and a sphere (this is kind of math heavy, if you have a hard time understanding it feel free to skip this for now) \
 https://www.scratchapixel.com/lessons/3d-basic-rendering/minimal-ray-tracer-rendering-simple-shapes/ray-sphere-intersection
+
+## RigidBody and CharacterController
+
+```
+//////////////////
+// WASD control
+//////////////////
+
+float vertInput = Input.GetAxis("Vertical");
+if(vertInput != 0)
+{
+	//motor.ResetPath();
+
+	Vector3 camForward = new Vector3(cam.transform.forward.x, 0.0f, cam.transform.forward.z);
+	Vector3 velocity = camForward * Input.GetAxis("Vertical") * wasdForwardSpeed * Time.deltaTime;
+
+	Vector3 newPosition = transform.position + velocity;
+	//rb.MovePosition(newPosition);
+	rb.velocity = velocity;
+}
+```

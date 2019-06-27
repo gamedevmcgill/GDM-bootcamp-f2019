@@ -6,11 +6,9 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public LayerMask movementMask;
-    public float wasdForwardSpeed = 15;
 
     Camera cam;
     PlayerMotor motor;
-    Rigidbody rb;
 
 
     // Start is called before the first frame update
@@ -18,8 +16,6 @@ public class PlayerController : MonoBehaviour
     {
         cam = Camera.main;
         motor = GetComponent<PlayerMotor>();
-        rb = GetComponent<Rigidbody>();
-        rb.interpolation = RigidbodyInterpolation.Interpolate;
     }
 
     // Update is called once per frame
@@ -35,7 +31,7 @@ public class PlayerController : MonoBehaviour
             if (Physics.Raycast(ray, out hit, 100, movementMask))
             {
                 motor.MoveToPoint(hit.point);
-                // Stop focusing any objects
+                // Stwsop focusing any objects
             }
         }
 
@@ -49,22 +45,6 @@ public class PlayerController : MonoBehaviour
                 // Check if we hit an interactable
                 // If we did, set it as our focusg
             }
-        }
-
-        //////////////////
-        // WASD control
-        //////////////////
-
-        float vertInput = Input.GetAxis("Vertical");
-        if(vertInput != 0)
-        {
-            motor.ResetPath();
-
-            Vector3 camForward = new Vector3(cam.transform.forward.x, 0.0f, cam.transform.forward.z);
-            Vector3 velocity = camForward * Input.GetAxis("Vertical") * wasdForwardSpeed * Time.deltaTime;
-
-            Vector3 newPosition = transform.position + velocity;
-            rb.MovePosition(newPosition);
         }
     }
 }
