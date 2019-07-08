@@ -13,16 +13,16 @@
 - Rename Test Item in hierarchy to Helmet of Fire, drag in corresponding Equipment object
   - Do same for Test Item 1 with Helmet of Protection
   
-*Equipment stats**
+**Equipment stats**
 - Explain enums
 - Go into Eqipment asset objects
   - Helmet of Protection armor = 3, damage = 0
   - Helmet of Fire armor = 2, damage = 1
 
-**Equipment Management (Equip, Unequip)**
+**Equipment Management**
 - Create script EquipmentManager on GameManager object, put in Scripts folder
 - Test with Debug Mode
-  - top of Inspector, (right of lock, sign that looks like =), click Debug Mode
+  - top of Inspector, (right of lock icon, looks like equal sign), click Debug Mode
   - This shows private variables and other stuff, will show private currentEquipment array
   - Show equip helmet once item is right clicked and then clicked on in inventory
 - Get out of Debug Mode
@@ -34,7 +34,7 @@
 **Remove from inventory on Equip and Swap on replacing equiped item**
 - Not much here
 
-**Uneqip**
+**Unequip**
 - Press U to unequip all items after equiping a the sword and a helmet
   - Can see currentEquipment array in EquipmentManager under GameManager only in Debug Mode
   
