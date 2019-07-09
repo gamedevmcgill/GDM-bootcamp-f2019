@@ -32,6 +32,8 @@ Stopping radius
 Face Target
   - show that when moving the sphere, the player does not face the target
   - explain that Quaternion holds rotation methods, pray
+  - https://answers.unity.com/questions/645903/please-explain-quaternions.html
+  - https://www.youtube.com/watch?v=zc8b2Jo7mno
   - draw lookat "direction" vector on board
   - mention resource for slerp for smoother rotation
   - show in play mode the player faces target even when within stopping radius
