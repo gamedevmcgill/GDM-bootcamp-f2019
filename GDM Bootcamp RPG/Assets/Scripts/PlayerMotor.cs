@@ -25,4 +25,9 @@ public class PlayerMotor : MonoBehaviour
     {
         agent.SetDestination(point);
     }
+
+    public void ResetPath()
+    {
+        agent.ResetPath();
+    }
 }
