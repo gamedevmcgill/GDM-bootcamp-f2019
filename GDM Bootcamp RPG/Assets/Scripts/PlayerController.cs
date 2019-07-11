@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.EventSystems;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerMotor))]
@@ -12,7 +11,6 @@ public class PlayerController : MonoBehaviour
     Camera cam;
     PlayerMotor motor;
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +21,9 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //hovering over UI, do not let player move
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
 
         if (Input.GetMouseButtonDown(0))
         {

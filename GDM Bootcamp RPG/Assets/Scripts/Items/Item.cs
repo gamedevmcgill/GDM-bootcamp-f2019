@@ -8,4 +8,15 @@ public class Item : ScriptableObject
     public Sprite icon = null;              // Item icon
     public bool isDefaultItem = false;		// Is the item default wear?
 
+
+    //virtual = can override in derived classes
+    //ex: Shape has virtual Area function  height * width 
+    //Circle has a different area formula, so it overrides it
+    public virtual void Use()
+    {
+        //Use the item
+        //Something might happen
+
+        Debug.Log("Using " + name);
+    }
 }
