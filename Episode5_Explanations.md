@@ -1,4 +1,4 @@
-## Unity Prefabs
+# Unity Prefabs
 Unity [PreFabs](https://docs.unity3d.com/Manual/Prefabs.html ) {short for _Prefabricated - (of a building or piece of furniture) manufactured in sections to enable quick or easy assembly on site_} allow you to: _"**create, configure, and store a GameObject complete with all its components, property values, and child GameObjects as a reusable Asset. The Prefab Asset acts as a template from which you can create new Prefab instances in the Scene.**"_ This definition is quite technical, and thus difficult to understand. In order to gain some clarity, let's take a step back and look at a problem that Prefabs are **really great** at solving:  
 
 
@@ -63,3 +63,8 @@ This was only a basic overview of what a prefab is: the prefab system has allot 
 
 
 There allot more interesting and neat features / use cases for prefabs, so we highly recommend [checking out Unity's documentation](https://docs.unity3d.com/Manual/Prefabs.html). This [video](https://www.youtube.com/watch?v=0Jc287z4Qpg) is another great introduction to prefabs.
+
+
+# Unity Canvas
+
+The unity canvas
