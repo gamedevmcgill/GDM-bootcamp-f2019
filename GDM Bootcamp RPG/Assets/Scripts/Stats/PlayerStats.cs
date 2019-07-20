@@ -21,6 +21,13 @@
         }
     }
 
+    public override void Die()
+    {
+        base.Die();
+        //Kill the player
+        PlayerManager.instance.KillPlayer();
+    }
+
     //you should always unsubscribe from an event once done using it
     private void OnDestroy()
     {
