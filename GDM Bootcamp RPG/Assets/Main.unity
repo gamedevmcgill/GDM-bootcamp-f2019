@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 607406313}
-  m_IndirectSpecularColor: {r: 0.18329301, g: 0.22892618, b: 0.30629778, a: 1}
+  m_IndirectSpecularColor: {r: 0.18329246, g: 0.22892533, b: 0.3062965, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3528,6 +3528,7 @@ GameObject:
   - component: {fileID: 755811060}
   - component: {fileID: 755811061}
   - component: {fileID: 755811062}
+  - component: {fileID: 755811063}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -3618,7 +3619,6 @@ MonoBehaviour:
   movementMask:
     serializedVersion: 2
     m_Bits: 256
-  wasdForwardSpeed: 15
 --- !u!114 &755811061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3643,6 +3643,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab32395371127d743902bbf5cd28d56d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &755811063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 755811055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18832aa769fe64fa79a6692b8c3c2f13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  currentHealth: 0
+  damage:
+    baseValue: 0
+  armor:
+    baseValue: 0
 --- !u!1 &765672447
 GameObject:
   m_ObjectHideFlags: 0

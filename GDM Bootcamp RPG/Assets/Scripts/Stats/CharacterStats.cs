@@ -5,7 +5,7 @@ using UnityEngine;
 public class CharacterStats : MonoBehaviour
 {
     public int maxHealth = 100;
-    public int currentHealth;
+    public int currentHealth { get; private set; }
 
     public Stat damage;
     public Stat armor;
@@ -13,13 +13,21 @@ public class CharacterStats : MonoBehaviour
 
     private void Awake()
     {
-        SetCurrentHealth(maxHealth);
+        this.currentHealth = maxHealth;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            TakeDamage(10);
+        }
     }
 
     public void TakeDamage(int damage)
     {
-
-        int a = armor.GetValue();
+        damage -= armor.GetValue();
+        damage = Mathf.Clamp(damage, 0, int.MaxValue);
 
         currentHealth -= damage;
         Debug.Log(transform.name + " takes " + damage + " damage.");
@@ -34,16 +42,6 @@ public class CharacterStats : MonoBehaviour
     {
         // Die in some way
         // This method is meant to be overwritten.
-        Debug.Log("Dead!");
-    }
-
-    public int GetCurrentHealth()
-    {
-        return currentHealth;
-    }
-
-    private void SetCurrentHealth(int health)
-    {
-        this.currentHealth = health;
+        Debug.Log(transform.name + "Dead!");
     }
 }
