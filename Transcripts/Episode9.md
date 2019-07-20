@@ -15,8 +15,21 @@ Start by resetting all damage and armour modifier on default scriptable objects.
 
 1. Create a new folder within Scripts called "Stats"
 2. Create two new scripts "CharacterStats" and "Stat" in the Scripts > Stats folder.
-    - CharacterStats: Responsible for keeping track of all stats on all characters in our game. Able to be extended from to add more specific traits.
+    - CharacterStats: Responsible for keeping track of all stats on all characters in our game. Will be able to be extended from to add more specific traits.
     - Stat: representing a single stat (like armour or damage).
 
 ~~~ Stat code changes ~~~
+
+- Add the CharacterStats to the Player GameObject
+- At this point, Brackey has added a test: whenever the user presses key, the character will take 10 points of damage.
+
+
+## PlayerStats
+
+- Our armor and damage modifiers are still unaffected by the equipment our player has equipped.
+- To change that, we create a new script: `PlayerStats` that derives from `CharacterStats`
+
+1. Remove the `CharacterStats` component from the player game object.
+2. Create a new script `PlayerStats` that derives from `CharacterStats`.
+3. Add this new script as a component of `Player`
 
