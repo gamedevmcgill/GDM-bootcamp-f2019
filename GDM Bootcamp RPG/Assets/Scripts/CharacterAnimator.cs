@@ -13,7 +13,7 @@ public class CharacterAnimator : MonoBehaviour
     NavMeshAgent agent;
     protected Animator animator;
     protected CharacterCombat combat;
-    protected AnimatorOverrideController overrideController;
+    public AnimatorOverrideController overrideController;
 
     protected virtual void Start()
     {
@@ -22,7 +22,11 @@ public class CharacterAnimator : MonoBehaviour
         combat = GetComponent<CharacterCombat>();
 
         //allows overriding in animator of specific animation, used here for swappnig attack animations
-        overrideController = new AnimatorOverrideController(animator.runtimeAnimatorController);
+
+        if(overrideController == null)
+        {
+            overrideController = new AnimatorOverrideController(animator.runtimeAnimatorController);
+        }
         animator.runtimeAnimatorController = overrideController;
 
         currentAttackAnimSet = defaultAttackAnimSet;
