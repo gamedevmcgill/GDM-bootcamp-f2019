@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class Stat //example = armor stat
 {
-    [SerializeField] private int baseValue;
+    [SerializeField] private int baseValue = 100;
 
     private List<int> modifiers = new List<int>();
 
