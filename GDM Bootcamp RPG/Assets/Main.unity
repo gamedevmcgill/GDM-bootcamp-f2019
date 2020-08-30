@@ -3774,7 +3774,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92afc9cac543d514087c8d805f47e291, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  replaceableAttackAnim: {fileID: 2353680664591731088, guid: 73be9633513854604baae3aa06041436,
+  replaceableAttackAnim: {fileID: 7400000, guid: 220499ee7b8406e479c6d05317305e07,
     type: 3}
   defaultAttackAnimSet:
   - {fileID: 2353680664591731088, guid: 73be9633513854604baae3aa06041436, type: 3}
@@ -5279,7 +5279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab32395371127d743902bbf5cd28d56d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  replaceableAttackAnim: {fileID: 2353680664591731088, guid: 73be9633513854604baae3aa06041436,
+  replaceableAttackAnim: {fileID: 7400000, guid: 220499ee7b8406e479c6d05317305e07,
     type: 3}
   defaultAttackAnimSet:
   - {fileID: -2516013265382948196, guid: 1d975900bd9f97f41ad7a081c10a18fb, type: 3}
@@ -9742,6 +9742,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1035692551}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 1d975900bd9f97f41ad7a081c10a18fb,
+        type: 3}
+      propertyPath: m_Name
+      value: Skeleton
+      objectReference: {fileID: 0}
     - target: {fileID: -6057140222963153312, guid: 1d975900bd9f97f41ad7a081c10a18fb,
         type: 3}
       propertyPath: m_Controller
@@ -9801,11 +9806,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 1d975900bd9f97f41ad7a081c10a18fb,
-        type: 3}
-      propertyPath: m_Name
-      value: Skeleton
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d975900bd9f97f41ad7a081c10a18fb, type: 3}
