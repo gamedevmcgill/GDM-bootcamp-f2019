@@ -1,3 +1,58 @@
+# Code Design
+
+* [Virtual Functions](#virtual-functions)
+* [Singleton](#the-singleton-design-pattern)
+* [Delegates](#delegates)
+
+The basics to code design for game programming. This document is more broad, with examples involving both C# and C++. Most concepts are good to know for non-game programming too!
+
+
+## Virtual Functions
+Virtual functions are a powerful tool in object-oriented programming. They allow us to redefine functionality in derived classes, and have them be executed dynamically. If it's your first time learning about virtual functions, that might not make a lot of sense, so let's look at a concrete example:
+```
+// C++ code (Java and C# have similar behaviour with different syntax)
+class Parent
+{
+    virtual void my_virtual_function() {
+        printf("Parent class virtual function!\n");
+    }
+    void my_non_virtual_function() {
+        printf("Parent class non-virtual function!\n");
+    }
+};
+
+class Child : public Parent 
+{
+    virtual void my_virtual_function() {
+        printf("Child class virtual function!\n");
+    }
+    void my_non_virtual_function() {
+        printf("Child class non-virtual function!\n");
+    } 
+};
+```
+Here we see that we've defined a class called **Parent** which has a virtual and non-virtual function, as well as a class called **Child** which derives from **Parent** and redefines the functions from the **Parent** class. Now, let's see what happens when we try create some instances of these classes and call these functions:
+```
+    Parent* p = new Parent();
+    Child* c = new Child();
+    
+    p->my_virtual_function(); // prints "Parent class virtual function!"
+    p->my_non_virtual_function(); // prints "Parent class non-virtual function!"
+    c->my_virtual_function(); // prints "Child class virtual function!"
+    c->my_non_virtual_function(); // prints "Child class non-virtual function!"
+```
+None of the results above should come as a surprise, because we have created explicit pointers to each of the **Parent** and **Child** objects which we've instantiated. However, what happens when our **Parent** pointer points to a instance of **Child**?
+```
+    Parent* p = new Child();
+    p->my_virtual_function(); // prints "Child class virtual function"
+    p->my_non_virtual_function(); // prints "Parent class virtual function"
+```
+As we can see, even though we have a **Parent** pointer, we can still execute the underlying function of the actual object being pointed to (in this case, a **Child** object) if we call a virtual function. Going back to the definition stated above, the actual function to execute is determined *dynamically* (also called dynamic dispatching) based on which object is actually pointed to during run-time, instead of statically (static dispatching) based on what type the pointer is. \
+**Important note:** In C++ and C#, the default behaviour for functions is to perform static dispatching, so if you'd like a function to be dynamically dispatching you must declare it as virtual. On the otherhand, Java's default behaviour is to perform static dispatching, so no use of the virtual keyword is needed. \
+Further readings: \
+Great stackoverflow question talking about virtual functions: https://stackoverflow.com/questions/2391679/why-do-we-need-virtual-functions-in-c \
+May be a little advanced if you're a beginner, but if you're curious as to how virtual functions are actually implemented under the hood, this is article goes deeper into that: https://pabloariasal.github.io/2017/06/10/understanding-virtual-tables/
+
 ## The Singleton Design Pattern
 Quite frequently in programming, we come across a very similar problem multiple times. Instead of trying to craft a different solution every time we encounter such a problem, it would make more sense to solve it once and then reuse it whenever we identify that we've run into the problem again! This is exactly what design patterns are. To quote sourcemaking.com/design_patterns : "In software engineering, a design pattern is a general repeatable solution to a commonly occurring problem in software design. A design pattern isn't a finished design that can be transformed directly into code. It is a description or template for how to solve a problem that can be used in many different situations."  \
 One very common design pattern is the singleton pattern. Explained briefly, the singleton design pattern allows us to create a class which can have at most one live instance at any given point in time. In addition, this single instance is commonly globally accessible, meaning that any system in the codebase can get a reference to this instance. As you might already be able to realize, this design pattern is extremely powerful, but with great power comes greater responsibility. The singleton pattern is by far the most abused design pattern, and it can cause very frustrating issues if used incorrectly. Before we get into that, let's see how we can implement a singleton in C#: \
@@ -93,38 +148,3 @@ And as always, the microsoft documentation is a treasure chest of information:
 https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/delegates/using-delegates
    
 
-
-
-
-
-
-
-Monobehavior is the interface that lets you integrate your script into the Unity engine gameplay loop. We talked about the gameplay loop before, this is how you get into it. 
-
-## MonoBehaviour 
-
-In the past, we mentioned that game objects are just containers for components essentially, and so if we wish to add logic to a game object we must build components. These components must fit into the game loop, namely we would like Unity’s game loop to call “Update” on our components so they can execute the logic we write. MonoBehaviour is the interface that allows us to build classes that are components which fit into Unity’s game loop and in turn allows us to build game objects tailored to our game. By inheriting from MonoBehaviour we inherit all the methods that Unity expects a component to have, and since they are virtual methods, we can override them with our desired logic. 
-
-A list of all the methods and variables that are inherited from MonoBehaviour can be found here:
-https://docs.unity3d.com/ScriptReference/MonoBehaviour.html
-
-## ScriptableObject
-
-While game objects are a significant portion of the assets we create when building a game, they alone are not always the perfect tool. A lot of the time, we wish to create containers for just data. An example of something that is purely data is the description for an item in an rpg, or a card in magic the gathering, or pokemon attacks in a pokemon game. Consider a game with some simple attacks that have the following properties:
-Name
-Damage
-Cooldown
-Energy Cost
-
-There is no game logic here, it is just a bunch of data, and a MyRpgCharacter component on a game object might then reference a bunch of these skills depending on what skills the player has chosen. The MyRpgCharacter component would have the gameplay logic associated with actually executing the skill, but it would pull the properties for the skill from the skill data.
-
-So, if MonoBehaviour is for writing components, and components are not what we want, how can we build this thing? Well, you could just use an excel sheet. Have an excel sheet where each row defines a skill, and then have a class called “Skill”, and during runtime you create a new instance of a Skill object for each row in the excel file and cache it. I’ve actually seen that approach used for an AAA game released in 2008. However Unity has a better solution: ScriptableObject.
-
-Like MonoBehaviour, ScriptableObject is an interface Unity provides us with which we can inherit from. You cannot attach ScriptableObjects to game objects, because they are not intended to be used like MonoBehaviour, however you create several instances of a ScriptableObject, each with unique data for the respective instance. 
-
-A good example with code is provided by Unity:
-https://docs.unity3d.com/Manual/class-ScriptableObject.html
-Also note in the above link, the first paragraph outlines why you would prefer to use ScriptableObjects over Prefabs, even though Prefabs can achieve the same thing. 
-
-A great talk on ScriptableObject vs MonoBehaviour can be found here:
-https://www.youtube.com/watch?v=VBA1QCoEAX4
