@@ -1,128 +1,161 @@
-﻿using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-public class EquipmentManager : MonoBehaviour
-{
-    #region Singleton
+/* Keep track of equipment. Has functions for adding and removing items. */
 
-    public static EquipmentManager instance;
+public class EquipmentManager : MonoBehaviour {
 
-    private void Awake()
-    {
-        instance = this;
-    }
+	#region Singleton
 
-    #endregion
+	public static EquipmentManager instance;
 
-    public Equipment [] defaultItems;
-    public SkinnedMeshRenderer targetMesh;
+	void Awake ()
+	{
+		instance = this;
+	}
 
-    Equipment[] currentEquipment;
-    SkinnedMeshRenderer[] currentMeshes;
+	#endregion
 
-    //let subscribed (+=) functions know of equipment change
-    public delegate void OnEquipmentChange(Equipment newItem, Equipment oldItem);
-    public OnEquipmentChange onEquipmentChange;
+	public enum MeshBlendShape { Torso, Arms, Legs };
+	public Equipment[] defaultEquipment;
 
-    Inventory inventory;
 
-    private void Start()
-    {
-        inventory = Inventory.instance;
+	public SkinnedMeshRenderer targetMesh;
+	SkinnedMeshRenderer[] currentMeshes;
 
-        //get the number of options in the equipment slot enum
-        int numSlots = System.Enum.GetNames(typeof(EquipmentSlot)).Length;
-        currentEquipment = new Equipment[numSlots];
+	public Transform shieldTransform;
+	public Transform swordTransform;
+
+	Equipment[] currentEquipment;   // Items we currently have equipped
+
+	// Callback for when an item is equipped/unequipped
+	public delegate void OnEquipmentChanged(Equipment newItem, Equipment oldItem);
+	public OnEquipmentChanged onEquipmentChanged;
+   
+
+	Inventory inventory;	// Reference to our inventory
+
+	void Start ()
+	{
+		inventory = Inventory.instance;		// Get a reference to our inventory
+
+		// Initialize currentEquipment based on number of equipment slots
+		int numSlots = System.Enum.GetNames(typeof(EquipmentSlot)).Length;
+		currentEquipment = new Equipment[numSlots];
         currentMeshes = new SkinnedMeshRenderer[numSlots];
 
-        EquipDefaultItems();
-    }
+        EquipDefaults();
+	}
 
-    public void Equip(Equipment newItem)
-    {
-        //number representation of an enum, so Head = 0, Chest = 1, etc
-        int slotIndex = (int)newItem.equipSlot;
-        Equipment oldItem = UnEquip(slotIndex); ;
+	// Equip a new item
+	public void Equip (Equipment newItem)
+	{
+		// Find out what slot the item fits in
+		int slotIndex = (int)newItem.equipSlot;
 
+        Equipment oldItem = Unequip(slotIndex);
 
-        if (onEquipmentChange != null)
-        {
-            onEquipmentChange.Invoke(newItem, oldItem);
-        }
+		// An item has been equipped so we trigger the callback
+		if (onEquipmentChanged != null)
+		{
+			onEquipmentChanged.Invoke(newItem, oldItem);
+		}
 
-        SetEquipmentBlendShapes(newItem, 100);
+		// Insert the item into the slot
+		currentEquipment[slotIndex] = newItem;
+        AttachToMesh(newItem, slotIndex);
+	}
 
-        currentEquipment[slotIndex] = newItem;
+	// Unequip an item with a particular index
+	public Equipment Unequip (int slotIndex)
+	{
+        Equipment oldItem = null;
+		// Only do this if an item is there
+		if (currentEquipment[slotIndex] != null)
+		{
+			// Add the item to the inventory
+			oldItem = currentEquipment[slotIndex];
+			inventory.Add(oldItem);
 
-        SkinnedMeshRenderer newMesh = Instantiate<SkinnedMeshRenderer>(newItem.mesh);
-        newMesh.transform.SetParent(targetMesh.transform);
-
-        //deforms like the player character object does
-        newMesh.bones = targetMesh.bones;
-        newMesh.rootBone = targetMesh.rootBone;
-        currentMeshes[slotIndex] = newMesh;
-    }
-
-    public Equipment UnEquip(int slotIndex)
-    {
-        if (currentEquipment[slotIndex] != null)
-        {
-            if(currentMeshes[slotIndex] != null)
+            SetBlendShapeWeight(oldItem, 0);
+            // Destroy the mesh
+            if (currentMeshes[slotIndex] != null)
             {
                 Destroy(currentMeshes[slotIndex].gameObject);
             }
 
-            Equipment oldItem = currentEquipment[slotIndex];
-            SetEquipmentBlendShapes(oldItem, 0);
+			// Remove the item from the equipment array
+			currentEquipment[slotIndex] = null;
 
-            inventory.Add(oldItem);
+			// Equipment has been removed so we trigger the callback
+			if (onEquipmentChanged != null)
+			{
+				onEquipmentChanged.Invoke(null, oldItem);
+			}
+		}
+        return oldItem;
+	}
 
-            currentEquipment[slotIndex] = null;
+	// Unequip all items
+	public void UnequipAll ()
+	{
+		for (int i = 0; i < currentEquipment.Length; i++)
+		{
+			Unequip(i);
+		}
 
-            if (onEquipmentChange != null)
-            {
-                //no new item when unequiping, so write null instead
-                onEquipmentChange.Invoke(null, oldItem);
-            }
+        EquipDefaults();
+	}
 
-            return oldItem;
-        }
+    void AttachToMesh(Equipment item, int slotIndex)
+	{
 
-        //no item found to unequip
-        return null;
-    }
+        SkinnedMeshRenderer newMesh = Instantiate(item.mesh) as SkinnedMeshRenderer;
 
-    public void UnEquipAll()
-    {
-        for(int i = 0; i < currentEquipment.Length; i++)
+		if (item != null && item.equipSlot == EquipmentSlot.Weapon)
+		{
+			newMesh.transform.parent = swordTransform.parent;
+			newMesh.rootBone = swordTransform;
+		}
+		else if (item != null && item.equipSlot == EquipmentSlot.Shield)
         {
-            UnEquip(i);
+			newMesh.transform.parent = shieldTransform.parent;
+			newMesh.rootBone = shieldTransform;
         }
-
-        EquipDefaultItems();
-    }
-
-    private void EquipDefaultItems()
-    {
-        foreach(Equipment item in defaultItems)
+		else
         {
-            Equip(item);
-        }
+			newMesh.transform.parent = targetMesh.transform.parent;
+			newMesh.rootBone = targetMesh.rootBone;
+			newMesh.bones = targetMesh.bones;
+			SetBlendShapeWeight(item, 100);
+		}
+
+		currentMeshes[slotIndex] = newMesh;
+	}
+
+    void SetBlendShapeWeight(Equipment item, int weight)
+    {
+		foreach (MeshBlendShape blendshape in item.coveredMeshRegions)
+		{
+			int shapeIndex = (int)blendshape;
+            targetMesh.SetBlendShapeWeight(shapeIndex, weight);
+		}
     }
 
-    private void Update()
+    void EquipDefaults()
     {
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-            UnEquipAll();
-        }
+		foreach (Equipment e in defaultEquipment)
+		{
+			Equip(e);
+		}
     }
 
-    private void SetEquipmentBlendShapes(Equipment item, int weight)
-    {
-        foreach(EquipmentMeshRegion blendShape in item.coveredMeshRegions)
-        {
-            //Order of blend shapes in Player body skinned mesh renderer must match enum order to get correct region
-            targetMesh.SetBlendShapeWeight((int)blendShape, weight);
-        }
-    }
+	void Update ()
+	{
+		// Unequip all items if we press U
+		if (Input.GetKeyDown(KeyCode.U))
+			UnequipAll();
+	}
+
 }
