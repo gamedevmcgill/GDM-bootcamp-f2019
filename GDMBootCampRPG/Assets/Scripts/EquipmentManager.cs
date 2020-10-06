@@ -110,26 +110,30 @@ public class EquipmentManager : MonoBehaviour {
 
     void AttachToMesh(Equipment item, int slotIndex)
 	{
+        SkinnedMeshRenderer newMesh = Instantiate<SkinnedMeshRenderer>(item.mesh);
 
-        SkinnedMeshRenderer newMesh = Instantiate(item.mesh) as SkinnedMeshRenderer;
-
-		if (item != null && item.equipSlot == EquipmentSlot.Weapon)
-		{
-			newMesh.transform.parent = swordTransform.parent;
-			newMesh.rootBone = swordTransform;
-		}
-		else if (item != null && item.equipSlot == EquipmentSlot.Shield)
+        if(item != null)
         {
-			newMesh.transform.parent = shieldTransform.parent;
-			newMesh.rootBone = shieldTransform;
+            // Aside: there is a new way to do switch statements in C# 8, this is the old way
+            Transform parentTransf;
+            switch(item.equipSlot)
+            {
+                case EquipmentSlot.Weapon:
+                    parentTransf = swordTransform;
+                    break;
+                case EquipmentSlot.Shield:
+                    parentTransf = shieldTransform;
+                    break;
+                default:
+                    parentTransf = targetMesh.transform;
+                    break;
+            };
+
+            newMesh.transform.SetParent(parentTransf.parent);
+            newMesh.rootBone = targetMesh.rootBone;
+            newMesh.bones = targetMesh.bones;
+            SetBlendShapeWeight(item, 100);
         }
-		else
-        {
-			newMesh.transform.parent = targetMesh.transform.parent;
-			newMesh.rootBone = targetMesh.rootBone;
-			newMesh.bones = targetMesh.bones;
-			SetBlendShapeWeight(item, 100);
-		}
 
 		currentMeshes[slotIndex] = newMesh;
 	}
