@@ -59,9 +59,4 @@ public class PlayerMotor : MonoBehaviour
         //transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
         transform.rotation = lookRotation;
     }
-
-    public void ResetPath()
-    {
-        agent.ResetPath();
-    }
 }
