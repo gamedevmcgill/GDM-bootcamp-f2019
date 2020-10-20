@@ -24,6 +24,11 @@ For more information on how to use, debug, build, and play in Unity, check out t
 If some of the assets do not appear, they made be .blend files, which can only be viewed if you have Blender installed.\
 Both Blender and Unity are free though!
 
+6. (optional)\
+Do not want to download Blender pre-2.8 version? Here is the environment and player as fbx files with the fixed animation issues caused by Blender 2.8+\
+Drag and drop the fbx edition unitypackage into your Unity project.\
+https://drive.google.com/file/d/1OBZSmQ2mcnoCyK-Lw8ZfbkufIkBOEsCf/view?usp=sharing
+
 ## Resources
 
 Brackey's RPG Playlist\
