@@ -10,7 +10,7 @@ public class PlayerAnimator : CharacterAnimator
     protected override void Start()
     {
         base.Start();
-        EquipmentManager.instance.onEquipmentChange += OnEquipmentChange;
+        EquipmentManager.instance.onEquipmentChanged += OnEquipmentChange;
 
         weaponAnimationsDict = new Dictionary<Equipment, AnimationClip[]>();
         foreach(WeaponAnimations a in weaponAnimations)

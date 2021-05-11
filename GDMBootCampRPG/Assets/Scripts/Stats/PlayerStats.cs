@@ -2,7 +2,7 @@
 {
     private void Start()
     {
-        EquipmentManager.instance.onEquipmentChange += OnEquipmentChange;
+        EquipmentManager.instance.onEquipmentChanged += OnEquipmentChange;
     }
 
     //TODO: called twice since Equip calls UnEqip, both of which invoke the event
@@ -31,6 +31,6 @@
     //you should always unsubscribe from an event once done using it
     private void OnDestroy()
     {
-        EquipmentManager.instance.onEquipmentChange -= OnEquipmentChange;
+        EquipmentManager.instance.onEquipmentChanged -= OnEquipmentChange;
     }
 }

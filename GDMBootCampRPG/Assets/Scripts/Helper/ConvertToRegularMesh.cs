@@ -12,7 +12,7 @@ public class ConvertToRegularMesh : MonoBehaviour
         meshFilter.sharedMesh = skinnedMeshRenderer.sharedMesh;
         meshRenderer.sharedMaterials = skinnedMeshRenderer.sharedMaterials;
 
-        DestroyImmediate(skinnedMeshRenderer);
-        DestroyImmediate(this);
+        DestroyImmediate(skinnedMeshRenderer, true);
+        DestroyImmediate(this, true);
     }
 }
